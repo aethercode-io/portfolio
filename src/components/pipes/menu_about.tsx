@@ -3,7 +3,6 @@
 import { Pipes } from './builder'
 import { COLORS } from '@/lib/colors'
 import { usePipesStore } from '@/state/pipes/reducer'
-import { useProgressStore } from '@/state/progress/reducer'
 
 const THICKNESS = 120
 const colors = [COLORS.navy_blue]
@@ -17,10 +16,8 @@ export function MenuToAboutPipes({ type }: { type: 'source' | 'target' }) {
 }
 
 function Source() {
-  const { unlockedPages } = useProgressStore()
   const { windowDimensions, menuAboutPipe } = usePipesStore()
-
-  if (!menuAboutPipe || !unlockedPages['about']) return null
+  if (!menuAboutPipe) return null
 
   const width = Math.abs(windowDimensions.width - menuAboutPipe.x)
 
@@ -39,9 +36,7 @@ function Source() {
 
 function Target() {
   const { menuAboutPipe } = usePipesStore()
-  const { unlockedPages } = useProgressStore()
-
-  if (!menuAboutPipe || !unlockedPages['about']) return null
+  if (!menuAboutPipe) return null
 
   return (
     <div
