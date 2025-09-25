@@ -1,26 +1,40 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-background: hsl(47, 37%, 85%);
+  --color-foreground: hsl(40, 100%, 1%);
+  --color-card: hsl(48, 58%, 92%);
+  --color-card-foreground: hsl(40, 100%, 1%);
+  --color-card-muted-foreground: hsl(40, 100%, 1%, 70%);
+  --color-border: hsl(48, 10%, 48%);
+  --color-primary: hsl(47, 84%, 81%);
+  --color-primary-foreground: hsl(40, 100%, 1%);
+  --shadow-card: -8px 8px 0 0 hsl(40, 100%, 1%);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --radius: 24px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border-color: var(--color-border);
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+.wrapper {
+  @apply relative flex items-center justify-center h-full w-full;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
