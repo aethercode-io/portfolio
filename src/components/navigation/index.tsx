@@ -7,7 +7,7 @@ import { useProgressStore } from '@/state/progress/reducer'
 
 export function NavigationBar() {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 z-50">
       {PAGES.map((page, i) => (
         <OptionButton key={i} page={page} />
       ))}

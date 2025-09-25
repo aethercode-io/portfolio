@@ -5,6 +5,9 @@ export const COLORS = {
   dark_red: '#992C3E',
   dark_purple: '#652F43',
   light_blue: '#C3D9FF',
+  sand_yellow: '#F7E5A5',
+  grass_green: '#BFC87D',
+  navy_blue: '#2F4858',
 }
 
 export const RAINBOW_COLORS: string[] = [

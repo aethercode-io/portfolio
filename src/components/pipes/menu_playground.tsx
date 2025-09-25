@@ -5,9 +5,9 @@ import { Pipes } from './builder'
 import { COLORS } from '@/lib/colors'
 
 const THICKNESS = 120
-const colors = [COLORS.sand_yellow]
+const colors = [COLORS.grass_green]
 
-export function MenuToExperiencePipes({ type }: { type: 'source' | 'target' }) {
+export function MenuToPlaygroundPipes({ type }: { type: 'source' | 'target' }) {
   if (type === 'source') {
     return <Source />
   } else {
@@ -16,15 +16,15 @@ export function MenuToExperiencePipes({ type }: { type: 'source' | 'target' }) {
 }
 
 function Source() {
-  const { menuExperiencePipe } = usePipesStore()
-  if (!menuExperiencePipe) return null
+  const { menuPlaygroundPipe } = usePipesStore()
+  if (!menuPlaygroundPipe) return null
 
   return (
     <div
-      className="absolute bottom-0 h-1/2 z-10"
+      className="absolute top-0 h-1/2 z-10"
       style={{
         transform: `translateX(-${THICKNESS / 2}px)`,
-        left: `${menuExperiencePipe.x}px`,
+        left: `${menuPlaygroundPipe.x}px`,
       }}
     >
       <Pipes thicknessStart={THICKNESS} thicknessEnd={THICKNESS} colors={colors} orientation="vertical" />
@@ -33,15 +33,15 @@ function Source() {
 }
 
 function Target() {
-  const { menuExperiencePipe } = usePipesStore()
-  if (!menuExperiencePipe) return null
+  const { menuPlaygroundPipe } = usePipesStore()
+  if (!menuPlaygroundPipe) return null
 
   return (
     <div
-      className="absolute top-0 h-1/2"
+      className="absolute bottom-0 h-1/2"
       style={{
         transform: `translateX(-${THICKNESS / 2}px)`,
-        left: `${menuExperiencePipe.x}px`,
+        left: `${menuPlaygroundPipe.x}px`,
       }}
     >
       <Pipes thicknessStart={THICKNESS} thicknessEnd={THICKNESS} colors={colors} orientation="vertical" />

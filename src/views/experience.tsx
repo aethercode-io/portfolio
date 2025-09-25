@@ -1,14 +1,18 @@
 'use client'
 
+import { Fragment, useState } from 'react'
 import { ArrowUpRightIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Card } from '@/components/ui/card'
-import { MenuToExperiencePipes } from '@/components/pipes'
 import { NavigationBar } from '@/components/navigation'
-import { useState } from 'react'
+import { MenuToExperiencePipes } from '@/components/pipes'
+import { useProgressStore } from '@/state/progress/reducer'
 
 export function ExperienceView() {
+  const { unlockedPages } = useProgressStore()
+  if (!unlockedPages['experience']) return null
+
   return (
     <div className="wrapper">
       <MenuToExperiencePipes type="target" />
@@ -41,15 +45,14 @@ function ContentCard() {
     <Card variant="paper" className="flex flex-row p-9 gap-8 relative h-[540px] w-full">
       <div className="flex flex-col justify-center gap-6 w-fit h-full">
         {OPTIONS.map((option, index) => (
-          <>
+          <Fragment key={option.key}>
             <OptionRow
-              key={option.key}
               option={option}
               active={selectedOption === option.key}
               toggle={() => setSelectedOption(option.key)}
             />
             {index !== OPTIONS.length - 1 && <div className="border-b border-border w-full" />}
-          </>
+          </Fragment>
         ))}
       </div>
       <div className="flex flex-1 bg-white h-full">

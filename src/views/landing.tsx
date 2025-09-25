@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { Card } from '@/components/ui/card'
 import { Bubble } from '@/components/bubble'
 import { Button } from '@/components/ui/button'
-import { useCameraMovements } from '@/state/camera/hooks'
 import { LandingToMenuPipes } from '@/components/pipes'
+import { useCameraMovements } from '@/state/camera/hooks'
 import { StackedLines } from '@/components/stacked-lines'
 
 export function LandingView() {
@@ -29,7 +29,7 @@ function BackgroundBubble() {
 
 function ContentCard() {
   return (
-    <Card className="relative flex flex-col px-14 py-10 justify-between h-[540px] w-11/12 lg:w-8/12">
+    <Card className="relative flex flex-col px-14 py-10 justify-between h-[540px] w-11/12 lg:w-8/12 overflow-hidden">
       <UpperSection />
       <LowerSection />
       <StackedLines position="top-right" />
