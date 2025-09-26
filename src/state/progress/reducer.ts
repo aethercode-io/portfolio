@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-import { PageKey } from '@/lib/views'
+import { ViewKey } from '@/lib/views'
 
 interface ProgressStore {
-  unlockedPages: Record<PageKey, boolean>
-  unlockPage: (pageKey: PageKey) => void
+  unlockedViews: Record<ViewKey, boolean>
+  unlockView: (viewKey: ViewKey) => void
   reset: () => void
 }
 
-const DEFAULT_UNLOCKED_PAGES: Record<PageKey, boolean> = {
+const DEFAULT_UNLOCKED_VIEWS: Record<ViewKey, boolean> = {
   landing: true,
   menu: true,
   experience: false,
@@ -20,23 +20,23 @@ const DEFAULT_UNLOCKED_PAGES: Record<PageKey, boolean> = {
 export const useProgressStore = create<ProgressStore>()(
   persist(
     (set, get) => ({
-      unlockedPages: DEFAULT_UNLOCKED_PAGES,
+      unlockedViews: DEFAULT_UNLOCKED_VIEWS,
 
-      unlockPage: (pageKey) => {
-        const { unlockedPages } = get()
-        if (unlockedPages[pageKey]) return
+      unlockView: (viewKey) => {
+        const { unlockedViews } = get()
+        if (unlockedViews[viewKey]) return
 
         set({
-          unlockedPages: {
-            ...unlockedPages,
-            [pageKey]: true,
+          unlockedViews: {
+            ...unlockedViews,
+            [viewKey]: true,
           },
         })
       },
 
       reset: () => {
         set({
-          unlockedPages: DEFAULT_UNLOCKED_PAGES,
+          unlockedViews: DEFAULT_UNLOCKED_VIEWS,
         })
       },
     }),

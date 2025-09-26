@@ -3,41 +3,40 @@
 import { LockKeyholeIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { useCameraMovements } from '@/state/camera/hooks'
 import { useProgressStore } from '@/state/progress/reducer'
-import { PAGES, getNumberColumns, getNumberRows, Page } from '@/lib/views'
-import { useCameraStore } from '@/state/camera/reducer'
+import { ViewCoords, VIEWS_GRID, getViewByCoords } from '@/lib/views'
+import { useCameraMovements, useIsActiveView } from '@/state/camera/hooks'
 
 export function MiniMap() {
-  const { unlockedPages } = useProgressStore()
-  const columns = getNumberColumns()
-  const rows = getNumberRows()
-  const percentage = Object.values(unlockedPages).filter(Boolean).length / Object.keys(unlockedPages).length
+  const { unlockedViews } = useProgressStore()
+  const numberOfColumns = VIEWS_GRID.reduce((acc, row) => Math.max(acc, row.length), 0)
+  const numberOfRows = VIEWS_GRID.length
+  const ratioUnlocked = Object.values(unlockedViews).filter(Boolean).length / Object.keys(unlockedViews).length
 
   return (
     <div className="bg-card border-border border rounded-sm z-50">
       <div
         className="grid p-5 gap-1"
         style={{
-          gridTemplateColumns: `repeat(${columns}, 1fr)`,
-          gridTemplateRows: `repeat(${rows}, 1fr)`,
+          gridTemplateColumns: `repeat(${numberOfColumns}, 1fr)`,
+          gridTemplateRows: `repeat(${numberOfRows}, 1fr)`,
         }}
       >
-        {Array.from({ length: columns * rows }).map((_, i) => (
-          <UnknownCell key={i} x={i % columns} y={Math.floor(i / columns)} />
+        {Array.from({ length: numberOfColumns * numberOfRows }).map((_, i) => (
+          <UnknownCell key={i} x={i % numberOfColumns} y={Math.floor(i / numberOfColumns)} />
         ))}
       </div>
-      <p className="absolute top-5 right-5 text-sm text-muted-foreground">{percentage * 100}%</p>
+      <p className="absolute top-5 right-5 text-sm text-muted-foreground">{ratioUnlocked * 100}%</p>
     </div>
   )
 }
 
 function UnknownCell({ x, y }: { x: number; y: number }) {
-  const page = PAGES.find((page) => page.x === x && page.y === y)
-  const { unlockedPages } = useProgressStore()
-  const unlocked = page && unlockedPages[page.key]
+  const view = getViewByCoords({ x, y })
+  const { unlockedViews } = useProgressStore()
+  const unlocked = view && unlockedViews[view.key]
 
-  if (!page) {
+  if (!view) {
     return <div className="w-32 h-16" />
   }
 
@@ -45,7 +44,7 @@ function UnknownCell({ x, y }: { x: number; y: number }) {
     return <LockedCell />
   }
 
-  return <UnlockedCell page={page} />
+  return <UnlockedCell view={view} />
 }
 
 function LockedCell() {
@@ -56,10 +55,9 @@ function LockedCell() {
   )
 }
 
-function UnlockedCell({ page }: { page: Page }) {
-  const { coordinates } = useCameraStore()
+function UnlockedCell({ view }: { view: ViewCoords }) {
+  const isActive = useIsActiveView(view)
   const { moveCameraTo } = useCameraMovements()
-  const isActive = coordinates.x === page.x && coordinates.y === page.y
 
   return (
     <button
@@ -67,11 +65,11 @@ function UnlockedCell({ page }: { page: Page }) {
         'cursor-default bg-primary text-primary-foreground': isActive,
         'cursor-pointer bg-white hover:bg-primary/50': !isActive,
       })}
-      onClick={() => moveCameraTo({ x: page.x, y: page.y })}
+      onClick={() => moveCameraTo({ x: view.x, y: view.y })}
       disabled={isActive}
     >
       {isActive && <div className="absolute top-2 left-2 w-2 h-2 bg-green-500/50 rounded-full" />}
-      <p className="text-center ">{page.key}</p>
+      <p className="text-center ">{view.key}</p>
     </button>
   )
 }

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { IVec2 } from '@/lib/types'
+import { IVec2 } from '@/lib/vector'
 
 interface PipeSetters {
   setMenuExperiencePipe: (pipe: IVec2 | null) => void

@@ -10,8 +10,8 @@ import { MenuToExperiencePipes } from '@/components/pipes'
 import { useProgressStore } from '@/state/progress/reducer'
 
 export function ExperienceView() {
-  const { unlockedPages } = useProgressStore()
-  if (!unlockedPages['experience']) return null
+  const { unlockedViews } = useProgressStore()
+  if (!unlockedViews['experience']) return null
 
   return (
     <div className="wrapper">
@@ -31,7 +31,7 @@ function ContentContainer() {
 }
 
 const OPTIONS = [
-  { title: 'P2P Derivatives', key: 'p2p-derivatives' },
+  { title: 'Derivatives', key: 'derivatives' },
   { title: 'Yield Optimizer', key: 'yield-optimizer' },
   { title: 'E-Commerce', key: 'e-commerce' },
 ] as const
@@ -55,8 +55,8 @@ function ContentCard() {
           </Fragment>
         ))}
       </div>
-      <div className="flex flex-1 bg-white h-full">
-        {selectedOption === 'p2p-derivatives' && <P2PDerivatives />}
+      <div className="relative flex bg-card h-full min-w-0 rounded-sm p-5">
+        {selectedOption === 'derivatives' && <Derivatives />}
         {selectedOption === 'yield-optimizer' && <YieldOptimizer />}
         {selectedOption === 'e-commerce' && <ECommerce />}
       </div>
@@ -78,8 +78,16 @@ function OptionRow({ option, active, toggle }: { option: Option; active: boolean
   )
 }
 
-function P2PDerivatives() {
-  return <div>P2P Derivatives</div>
+function Derivatives() {
+  return (
+    <div className="flex flex-col gap-2 h-full w-full overflow-hidden text-wrap flex-wrap">
+      <h1 className="text-[40px] font-medium">Derivatives</h1>
+      <p className="text-sm text-muted-foreground break-words leading-relaxed">
+        Derivatives are financial instruments that derive their value from an underlying asset. They are used to hedge
+        against risk or to speculate on the future price of an asset.
+      </p>
+    </div>
+  )
 }
 
 function YieldOptimizer() {

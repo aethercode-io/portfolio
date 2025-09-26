@@ -1,7 +1,8 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { PAGES } from '@/lib/views'
+import { VIEWS_FC } from '@/views'
+import { VIEWS_COORDS } from '@/lib/views'
 import { useIsResizing } from '@/hooks/useIsResizing'
 import { useCameraStore } from '@/state/camera/reducer'
 
@@ -19,20 +20,21 @@ export function CameraGrid() {
           transform: `translate(${-coordinates.x * 100}dvw, ${-coordinates.y * 100}dvh)`,
         }}
       >
-        {PAGES.map((page, i) => (
-          <div
-            key={i}
-            className={cn('absolute w-screen h-screen', {
-              // hidden: Math.abs(coordinates.x - page.x) > 1 || Math.abs(coordinates.y - page.y) > 1,
-            })}
-            style={{
-              left: `${page.x * 100}vw`,
-              top: `${page.y * 100}vh`,
-            }}
-          >
-            <page.view />
-          </div>
-        ))}
+        {VIEWS_COORDS.map((coords, i) => {
+          const View = VIEWS_FC[coords.key]
+          return (
+            <div
+              key={i}
+              className={cn('absolute w-screen h-screen')}
+              style={{
+                left: `${coords.x * 100}vw`,
+                top: `${coords.y * 100}vh`,
+              }}
+            >
+              <View />
+            </div>
+          )
+        })}
       </div>
     </div>
   )

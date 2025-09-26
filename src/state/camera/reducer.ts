@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-import { IVec2 } from '@/lib/types'
+import { IVec2 } from '@/lib/vector'
 
 interface CameraStore {
   coordinates: IVec2

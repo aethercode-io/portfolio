@@ -1,8 +1,8 @@
 'use client'
 
-import { usePipesStore } from '@/state/pipes/reducer'
 import { Pipes } from './builder'
 import { COLORS } from '@/lib/colors'
+import { usePipesStore } from '@/state/pipes/reducer'
 
 const THICKNESS = 120
 const colors = [COLORS.sand_yellow]

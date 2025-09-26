@@ -4,36 +4,36 @@ import { useState } from 'react'
 import { LockKeyholeIcon, MapIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { PAGES } from '@/lib/views'
+import { getViewByKey } from '@/lib/views'
 import { MiniMap } from '@/components/mini-map'
 import { useCameraStore } from '@/state/camera/reducer'
 import { useProgressStore } from '@/state/progress/reducer'
 import { useResetProgress } from '@/state/progress/hooks'
-import { useCameraMovements } from '@/state/camera/hooks'
+import { useActiveView, useCameraMovements } from '@/state/camera/hooks'
+
+const landingViewCoords = getViewByKey('landing')
+const menuViewCoords = getViewByKey('menu')
 
 export function NavigationBar() {
-  const { coordinates } = useCameraStore()
   const { moveCameraTo } = useCameraMovements()
-  const { unlockedPages } = useProgressStore()
+  const { unlockedViews } = useProgressStore()
   const resetProgress = useResetProgress()
   const [showMiniMap, setShowMiniMap] = useState(false)
-  const landing = PAGES.find((page) => page.key === 'landing')!
-  const menu = PAGES.find((page) => page.key === 'menu')!
 
-  const numberLocked = Object.entries(unlockedPages).filter(([_, unlocked]) => !unlocked).length
-  const currentPage = PAGES.find((page) => page.x === coordinates.x && page.y === coordinates.y)!
-  const currentPageIsNotDefault = currentPage.key !== 'landing' && currentPage.key !== 'menu'
+  const numberLocked = Object.entries(unlockedViews).filter(([_, unlocked]) => !unlocked).length
+  const activeView = useActiveView()
+  const activeViewIsNotDefault = activeView.key !== 'landing' && activeView.key !== 'menu'
 
   return (
     <div className="flex gap-1 z-50">
       <Pill className="[&_button]:cursor-pointer">
-        <button onClick={() => moveCameraTo(landing)}>~</button>
+        <button onClick={() => moveCameraTo(landingViewCoords)}>~</button>
         <DiagonalLine />
-        <button onClick={() => moveCameraTo(menu)}>menu</button>
-        {currentPageIsNotDefault && (
+        <button onClick={() => moveCameraTo(menuViewCoords)}>menu</button>
+        {activeViewIsNotDefault && (
           <>
             <DiagonalLine />
-            {currentPage.key}
+            {activeView.key}
           </>
         )}
       </Pill>

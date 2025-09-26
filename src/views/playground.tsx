@@ -6,8 +6,8 @@ import { MenuToPlaygroundPipes } from '@/components/pipes'
 import { useProgressStore } from '@/state/progress/reducer'
 
 export function PlaygroundView() {
-  const { unlockedPages } = useProgressStore()
-  if (!unlockedPages['playground']) return null
+  const { unlockedViews } = useProgressStore()
+  if (!unlockedViews['playground']) return null
 
   return (
     <div className="wrapper">

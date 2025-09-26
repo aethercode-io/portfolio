@@ -6,8 +6,8 @@ import { NavigationBar } from '@/components/navigation'
 import { useProgressStore } from '@/state/progress/reducer'
 
 export function AboutView() {
-  const { unlockedPages } = useProgressStore()
-  if (!unlockedPages['about']) return null
+  const { unlockedViews } = useProgressStore()
+  if (!unlockedViews['about']) return null
 
   return (
     <div className="wrapper">

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { IVec2 } from '@/lib/types'
+import { IVec2 } from '@/lib/vector'
 
 const STROKE_COLOR = '#180800'
 const STROKE_WIDTH = 1
