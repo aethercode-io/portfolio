@@ -27,7 +27,7 @@ export function MenuView() {
 
 function ContentFrame() {
   return (
-    <Card className="relative flex p-6 gap-2 h-[540px] w-full">
+    <Card className="relative flex p-6 gap-2 h-[540px] z-20 w-full">
       <ExperienceOption className="rounded-l-md" />
       <PlaygroundOption />
       <AboutOption className="rounded-r-md" />

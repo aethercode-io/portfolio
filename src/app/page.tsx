@@ -1,7 +1,8 @@
 import Image from 'next/image'
 
-import { CameraGrid } from '@/components/camera-grid'
 import { Updaters } from '@/state/updaters'
+import { MiniMap } from '@/components/mini-map'
+import { CameraGrid } from '@/components/camera-grid'
 
 export default function Home() {
   return (

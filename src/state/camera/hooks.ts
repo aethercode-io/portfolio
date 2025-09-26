@@ -7,7 +7,7 @@ export function useCameraMovements() {
   const { unlockPage } = useProgressStore()
   const { setCoordinates, coordinates } = useCameraStore()
 
-  const setTarget = (target: IVec2) => {
+  const moveCameraTo = (target: IVec2) => {
     const page = getPage(target)
 
     if (page) {
@@ -17,22 +17,23 @@ export function useCameraMovements() {
   }
 
   const moveCameraUp = () => {
-    setTarget({ x: coordinates.x, y: coordinates.y - 1 })
+    moveCameraTo({ x: coordinates.x, y: coordinates.y - 1 })
   }
 
   const moveCameraDown = () => {
-    setTarget({ x: coordinates.x, y: coordinates.y + 1 })
+    moveCameraTo({ x: coordinates.x, y: coordinates.y + 1 })
   }
 
   const moveCameraLeft = () => {
-    setTarget({ x: coordinates.x - 1, y: coordinates.y })
+    moveCameraTo({ x: coordinates.x - 1, y: coordinates.y })
   }
 
   const moveCameraRight = () => {
-    setTarget({ x: coordinates.x + 1, y: coordinates.y })
+    moveCameraTo({ x: coordinates.x + 1, y: coordinates.y })
   }
 
   return {
+    moveCameraTo,
     moveCameraUp,
     moveCameraDown,
     moveCameraLeft,

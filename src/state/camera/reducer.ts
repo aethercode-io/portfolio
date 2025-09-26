@@ -11,7 +11,7 @@ interface CameraStore {
 export const useCameraStore = create<CameraStore>()(
   persist(
     (set, get) => ({
-      coordinates: { x: 0, y: 0 },
+      coordinates: { x: 0, y: 1 },
       setCoordinates: (coordinates) => set({ coordinates }),
     }),
     {

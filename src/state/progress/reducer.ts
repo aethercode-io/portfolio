@@ -6,18 +6,21 @@ import { PageKey } from '@/lib/views'
 interface ProgressStore {
   unlockedPages: Record<PageKey, boolean>
   unlockPage: (pageKey: PageKey) => void
+  reset: () => void
+}
+
+const DEFAULT_UNLOCKED_PAGES: Record<PageKey, boolean> = {
+  landing: true,
+  menu: true,
+  experience: false,
+  playground: false,
+  about: false,
 }
 
 export const useProgressStore = create<ProgressStore>()(
   persist(
     (set, get) => ({
-      unlockedPages: {
-        landing: true,
-        menu: false,
-        experience: false,
-        playground: false,
-        about: false,
-      },
+      unlockedPages: DEFAULT_UNLOCKED_PAGES,
 
       unlockPage: (pageKey) => {
         const { unlockedPages } = get()
@@ -28,6 +31,12 @@ export const useProgressStore = create<ProgressStore>()(
             ...unlockedPages,
             [pageKey]: true,
           },
+        })
+      },
+
+      reset: () => {
+        set({
+          unlockedPages: DEFAULT_UNLOCKED_PAGES,
         })
       },
     }),
