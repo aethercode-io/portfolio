@@ -3,8 +3,8 @@ import { usePipesStore } from './reducer'
 import { useElementObserver } from '@/hooks/useElementObserver'
 
 const PipeSetterKeys = {
+  menu_projects: 'setMenuProjectsPipe',
   menu_experience: 'setMenuExperiencePipe',
-  menu_playground: 'setMenuPlaygroundPipe',
   menu_about: 'setMenuAboutPipe',
 } as const
 

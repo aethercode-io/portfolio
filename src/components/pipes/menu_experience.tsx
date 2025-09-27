@@ -5,7 +5,7 @@ import { COLORS } from '@/lib/colors'
 import { usePipesStore } from '@/state/pipes/reducer'
 
 const THICKNESS = 120
-const colors = [COLORS.sand_yellow]
+const colors = [COLORS.grass_green]
 
 export function MenuToExperiencePipes({ type }: { type: 'source' | 'target' }) {
   if (type === 'source') {
@@ -21,7 +21,7 @@ function Source() {
 
   return (
     <div
-      className="absolute bottom-0 h-1/2 z-10"
+      className="absolute top-0 h-1/2 z-10"
       style={{
         transform: `translateX(-${THICKNESS / 2}px)`,
         left: `${menuExperiencePipe.x}px`,
@@ -38,7 +38,7 @@ function Target() {
 
   return (
     <div
-      className="absolute top-0 h-1/2"
+      className="absolute bottom-0 h-1/2"
       style={{
         transform: `translateX(-${THICKNESS / 2}px)`,
         left: `${menuExperiencePipe.x}px`,

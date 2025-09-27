@@ -12,8 +12,8 @@ interface ProgressStore {
 const DEFAULT_UNLOCKED_VIEWS: Record<ViewKey, boolean> = {
   landing: true,
   menu: true,
+  projects: false,
   experience: false,
-  playground: false,
   about: false,
 }
 

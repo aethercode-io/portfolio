@@ -1,6 +1,6 @@
 import { IVec2 } from '@/lib/vector'
 
-export type ViewKey = 'landing' | 'menu' | 'experience' | 'playground' | 'about'
+export type ViewKey = 'landing' | 'menu' | 'projects' | 'experience' | 'about'
 
 export interface ViewCoords extends IVec2 {
   key: ViewKey
@@ -12,9 +12,9 @@ export interface ViewFC extends ViewCoords {
 
 // prettier-ignore
 export const VIEWS_GRID: Array<Array<ViewKey | null>> = [
-  [null,      'playground', null    ],
-  ['landing', 'menu',       'about' ],
   [null,      'experience', null    ],
+  ['landing', 'menu',       'about' ],
+  [null,      'projects',   null    ],
 ]
 
 export const VIEWS_COORDS = VIEWS_GRID.reduce((acc, row, y) => {
